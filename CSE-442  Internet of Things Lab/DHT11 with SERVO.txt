@@ -1,0 +1,60 @@
+/**
+ * Hardware Mappings:
+ * - DHT11 Data Pin: D1 (GPIO 5)
+ * - DHT11 GND  Pin: GND
+ * - DHT11 VCC  Pin: 3.3v
+ */
+ /**
+ * Hardware Mappings:
+ * - SG90 Signal Pin (Yellow)     : D4 (GPIO 4)
+ * - SG90 VCC    Pin (Red)        : 3.3v or 3v3 or 3v
+ * - SG90 GND    Pin (Black/Brown): GND
+ */ 
+
+#include <Servo.h>
+#define SERVOPIN D2       
+
+Servo servo;
+#include <DHT.h>
+
+#define DHTPIN D1           
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+  servo.attach(SERVOPIN);
+  servo.write(0); 
+  Serial.println("System Status: READY");
+}
+
+
+void loop() {
+
+
+  float tempReading     = dht.readTemperature();
+  float humidityReading = dht.readHumidity();
+
+  if (isnan(tempReading) || isnan(humidityReading)) {
+    Serial.println("[ERROR]: Check physical circuit wiring! DHT11 returned NaN.");
+    return; 
+    
+  }
+
+  if ( tempReading > 26 ){
+    servo.write(180); // set to 180 degree position
+  }
+  else{
+    servo.write(0);  // set to 0 degree positoin
+  }
+
+  Serial.print("Sensor Read -> Temperature: ");
+  Serial.print(tempReading, 1);
+  Serial.print("°C | Humidity: ");
+  Serial.print(humidityReading, 1);
+  Serial.println("%");
+  
+  delay(2000);
+}

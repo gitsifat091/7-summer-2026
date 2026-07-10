@@ -1,0 +1,49 @@
+#define pred D1
+#define pyellow D2
+#define pgreen D3
+
+#define pbuzzer D4
+
+
+void setup() {
+pinMode(pred,OUTPUT);
+pinMode(pyellow,OUTPUT);
+pinMode(pgreen,OUTPUT);
+pinMode(pbuzzer, OUTPUT);
+
+}
+
+void loop() {
+
+digitalWrite(pred,HIGH);
+digitalWrite(pyellow,HIGH);
+digitalWrite(pgreen,HIGH);
+digitalWrite(pbuzzer, LOW);
+delay(1000);
+
+digitalWrite(pred,HIGH);
+digitalWrite(pyellow,LOW);
+digitalWrite(pgreen,LOW);
+digitalWrite(pbuzzer, LOW);
+delay(1000);
+
+digitalWrite(pred,LOW);
+digitalWrite(pyellow,HIGH);
+digitalWrite(pgreen,LOW);
+digitalWrite(pbuzzer, LOW);
+delay(1000);
+
+digitalWrite(pred,LOW);
+digitalWrite(pyellow,LOW);
+digitalWrite(pgreen,HIGH);
+digitalWrite(pbuzzer, HIGH);
+delay(1000);
+
+digitalWrite(pred,LOW);
+digitalWrite(pyellow,LOW);
+digitalWrite(pgreen,LOW);
+digitalWrite(pbuzzer, LOW);
+delay(1000);
+
+
+}
